@@ -17,6 +17,13 @@
         </activity>
         <activity android:name=".ImageWeaver" >
         </activity>
+        <activity
+            android:name="com.vk.sdk.VKServiceActivity"
+            android:label="ServiceActivity"
+            android:theme="@style/VK.Transparent"/> // Activity для вконтакли (иначе могут произойти ошибки)
     </application>
+
+    <uses-permission
+        android:name="android.permission.INTERNET"/>
 
 </manifest>
