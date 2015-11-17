@@ -97,12 +97,12 @@ public class ChooseGroupActivity extends AppCompatActivity {
             @Override
             public void onComplete(VKResponse response) {
                 try {
-                    ImageManager.getIstance().parseImages(response.json.getJSONArray("items")); // парсим все каритнки
+                    ImageManager.getIstance().parseImages(response.json.getJSONObject("response").getJSONArray("items")); // парсим все каритнки
                     ((TextView) findViewById(R.id.infoMessage)).setText("Done");
-                    setContentView(R.layout.activity_image_weaver);
                 } catch (Exception e) {
-                    ((TextView) findViewById(R.id.infoMessage)).setText(e.getMessage());
+                    e.printStackTrace();
                 }
+                setContentView(R.layout.activity_image_weaver);
             }
         });
     }

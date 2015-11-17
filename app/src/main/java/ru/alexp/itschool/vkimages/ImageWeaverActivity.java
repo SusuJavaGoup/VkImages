@@ -3,7 +3,6 @@ package ru.alexp.itschool.vkimages;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.GridLayout;
-import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -13,16 +12,17 @@ public class ImageWeaverActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_weaver);
-        loadImages();
+        //loadImages();
     }
 
     private void loadImages() {
         GridLayout grid = (GridLayout) findViewById(R.id.grid);
         ArrayList<VkImage> images = ImageManager.getIstance().getImages();
-        for (VkImage image : images) {
-            ImageView i = new ImageView(null);
-            i.setImageURI(image.getURI());
-            grid.addView(i);
-        }
+        //for (VkImage image : images) {
+        //ImageView i = new ImageView(null);
+        //i.setImageURI(image.getURI());
+        //grid.addView(i);
+        //}
+        // поправьте меня
     }
 }
