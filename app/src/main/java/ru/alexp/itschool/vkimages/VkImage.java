@@ -1,6 +1,6 @@
 package ru.alexp.itschool.vkimages;
 
-import java.net.URI;
+import android.net.Uri;
 
 /**
  * Created by Александр on 16.11.2015.
@@ -10,9 +10,9 @@ public class VkImage {
     private String descr;
     private final int timestamp;
     private int[] coords;
-    private final URI image;
+    private final Uri image;
 
-    public VkImage(String title, int timestamp, URI image) {
+    public VkImage(String title, int timestamp, Uri image) {
         this.title = title;
         this.timestamp = timestamp;
         this.image = image;
@@ -44,7 +44,7 @@ public class VkImage {
         return coords;
     }
 
-    public URI getURI() {
+    public Uri getURI() {
         return image;
     }
 }
