@@ -1,5 +1,6 @@
 package ru.alexp.itschool.vkimages;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -102,7 +103,8 @@ public class ChooseGroupActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                setContentView(R.layout.activity_image_weaver);
+                Intent intent = new Intent(ChooseGroupActivity.this, ImageWeaverActivity.class);
+                startActivity(intent);
             }
         });
     }

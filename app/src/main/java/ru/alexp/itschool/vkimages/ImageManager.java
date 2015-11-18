@@ -1,12 +1,13 @@
 package ru.alexp.itschool.vkimages;
 
-import android.net.Uri;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by Александр on 16.11.2015.
@@ -26,13 +27,20 @@ public class ImageManager {
                 for (int j = 0; j < attachments.length(); j++) {
                     JSONObject attachment = attachments.getJSONObject(j);
                     if (attachment.getString("type").equalsIgnoreCase("photo")) {
-                        final int width = attachment.getInt("width");
-                        final Uri uri = Uri.parse(attachment.getString("photo_" + width));
-                        images.add(new VkImage(title, timestamp, uri));
+                        attachment = attachment.getJSONObject("photo");
+                        Iterator<String> it = attachment.keys();
+                        String field = "";
+                        while (it.hasNext()) {
+                            String ff = it.next();
+                            if (ff.startsWith("photo_")) {
+                                field = ff;
+                            }
+                        }
+                        images.add(new VkImage(title, timestamp, new URL(attachment.getString(field))));
                     }
                 }
-            } catch (JSONException e) {
-                // просто забей
+            } catch (JSONException | MalformedURLException e) {
+                e.printStackTrace();
             }
         }
     }

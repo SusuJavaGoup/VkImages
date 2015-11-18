@@ -1,6 +1,12 @@
 package ru.alexp.itschool.vkimages;
 
-import android.net.Uri;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.widget.ImageView;
+
+import java.io.IOException;
+import java.net.URL;
 
 /**
  * Created by Александр on 16.11.2015.
@@ -10,12 +16,13 @@ public class VkImage {
     private String descr;
     private final int timestamp;
     private int[] coords;
-    private final Uri image;
+    private final URL url;
+    private Bitmap bitmap;
 
-    public VkImage(String title, int timestamp, Uri image) {
+    public VkImage(String title, int timestamp, URL image) {
         this.title = title;
         this.timestamp = timestamp;
-        this.image = image;
+        this.url = image;
     }
 
     public VkImage setCoords(int[] coords) {
@@ -44,7 +51,27 @@ public class VkImage {
         return coords;
     }
 
-    public Uri getURI() {
-        return image;
+    public URL getURL() {
+        return url;
+    }
+
+    public void createBitmap() {
+        try {
+            bitmap = BitmapFactory.decodeStream(getURL().openConnection().getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Bitmap getBitmap() {
+        if (bitmap == null)
+            createBitmap();
+        return bitmap;
+    }
+
+    public ImageView getImageView(Context context) {
+        ImageView iv = new ImageView(context);
+        iv.setImageBitmap(getBitmap());
+        return iv;
     }
 }

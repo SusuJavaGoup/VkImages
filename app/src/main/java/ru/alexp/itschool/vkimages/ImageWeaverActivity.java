@@ -12,17 +12,14 @@ public class ImageWeaverActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_weaver);
-        //loadImages();
+        loadImages();
     }
 
     private void loadImages() {
         GridLayout grid = (GridLayout) findViewById(R.id.grid);
         ArrayList<VkImage> images = ImageManager.getIstance().getImages();
-        //for (VkImage image : images) {
-        //ImageView i = new ImageView(null);
-        //i.setImageURI(image.getURI());
-        //grid.addView(i);
-        //}
-        // поправьте меня
+        for (VkImage image : images) {
+            grid.addView(image.getImageView(this));
+        }
     }
 }
