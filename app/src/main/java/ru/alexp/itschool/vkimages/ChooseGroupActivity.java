@@ -81,7 +81,7 @@ public class ChooseGroupActivity extends AppCompatActivity {
     private void loadWallImages() {
         ((TextView) findViewById(R.id.infoMessage)).setText("Loading ...");
 
-        final String id = Vars.getValue("groupId", "");
+        final String id = Vars.getString("groupId", "");
         VKParameters params;
         if (id.startsWith("-")) {
             params = VKParameters.from(VKApiConst.OWNER_ID, id);
@@ -114,6 +114,7 @@ public class ChooseGroupActivity extends AppCompatActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    ((TextView) findViewById(R.id.infoMessage)).setText("Done");
                                     startActivity(intent);
                                 }
                             });
@@ -121,9 +122,7 @@ public class ChooseGroupActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }
-                }).run();
-                ((TextView) findViewById(R.id.infoMessage)).setText("Done");
-
+                }).start();
             }
         });
     }
