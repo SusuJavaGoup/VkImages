@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">VkImages</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <integer name="com_vk_sdk_AppId">9</integer>
+
+    <string name="title_activity_single_image_viewer">SingleImageViewerActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
     <!-- нет смысла писать сюда реальный AppKey -->
 </resources>

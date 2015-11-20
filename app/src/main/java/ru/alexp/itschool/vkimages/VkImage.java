@@ -1,8 +1,10 @@
 package ru.alexp.itschool.vkimages;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.view.View;
 import android.widget.ImageView;
 
 import java.net.URL;
@@ -69,11 +71,24 @@ public class VkImage {
         return bitmap;
     }
 
-    public ImageView getImageView(Context context) {
+    public ImageView getImageView(final Context context) {
         if (iv == null) {
             iv = new ImageView(context);
             iv.setImageBitmap(getBitmap());
+            iv.setClickable(true);
+            iv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Vars.putValue("ImageToShow", getVkImage());
+                    Intent intent = new Intent(context, SingleImageViewerActivity.class);
+                    context.startActivity(intent);
+                }
+            });
         }
         return iv;
+    }
+
+    private VkImage getVkImage() {
+        return this;
     }
 }
