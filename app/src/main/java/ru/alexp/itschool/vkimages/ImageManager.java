@@ -18,6 +18,7 @@ public class ImageManager {
     private ArrayList<VkImage> images = new ArrayList<>();
 
     public void parseImages(JSONArray array) throws JSONException {
+        images.clear();
         for (int i = 0; i < array.length(); i++) {
             JSONObject jsonObj = array.getJSONObject(i);
             try {

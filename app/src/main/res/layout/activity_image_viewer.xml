@@ -11,22 +11,30 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/linearLayout">
+        android:id="@+id/linearLayout"
+        android:scrollIndicators="right">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/linearLayout"
             android:layout_alignParentStart="true"
-            android:gravity="right"></LinearLayout>
+            android:gravity="right">
 
-        <GridLayout
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Map"
+                android:id="@+id/button" />
+        </LinearLayout>
+
+        <GridView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:rowCount="3"
-            android:id="@+id/grid"></GridLayout>
+            android:id="@+id/grid"
+            android:numColumns="3"/>
 
     </LinearLayout>
 

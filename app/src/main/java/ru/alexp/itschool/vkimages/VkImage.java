@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
 
-import java.io.IOException;
 import java.net.URL;
 
 /**
@@ -18,6 +17,7 @@ public class VkImage {
     private int[] coords;
     private final URL url;
     private Bitmap bitmap;
+    private ImageView iv;
 
     public VkImage(String title, int timestamp, URL image) {
         this.title = title;
@@ -58,7 +58,7 @@ public class VkImage {
     public void createBitmap() {
         try {
             bitmap = BitmapFactory.decodeStream(getURL().openConnection().getInputStream());
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -70,8 +70,10 @@ public class VkImage {
     }
 
     public ImageView getImageView(Context context) {
-        ImageView iv = new ImageView(context);
-        iv.setImageBitmap(getBitmap());
+        if (iv == null) {
+            iv = new ImageView(context);
+            iv.setImageBitmap(getBitmap());
+        }
         return iv;
     }
 }

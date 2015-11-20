@@ -15,6 +15,8 @@ import com.vk.sdk.api.VKParameters;
 import com.vk.sdk.api.VKRequest;
 import com.vk.sdk.api.VKResponse;
 
+import java.util.ArrayList;
+
 public class ChooseGroupActivity extends AppCompatActivity {
 
 
@@ -96,15 +98,32 @@ public class ChooseGroupActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onComplete(VKResponse response) {
-                try {
-                    ImageManager.getIstance().parseImages(response.json.getJSONObject("response").getJSONArray("items")); // парсим все каритнки
-                    ((TextView) findViewById(R.id.infoMessage)).setText("Done");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                Intent intent = new Intent(ChooseGroupActivity.this, ImageWeaverActivity.class);
-                startActivity(intent);
+            public void onComplete(final VKResponse response) {
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            ImageManager.getIstance().parseImages(response.json.getJSONObject("response").getJSONArray("items")); // парсим все каритнки
+
+                            final Intent intent = new Intent(ChooseGroupActivity.this, ImageViewerActivity.class);
+                            ArrayList<VkImage> images = ImageManager.getIstance().getImages();
+                            for (VkImage image : images) {
+                                image.createBitmap();
+                            }
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    startActivity(intent);
+                                }
+                            });
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).run();
+                ((TextView) findViewById(R.id.infoMessage)).setText("Done");
+
             }
         });
     }
