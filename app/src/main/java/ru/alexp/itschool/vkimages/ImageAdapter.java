@@ -14,11 +14,11 @@ import java.util.ArrayList;
  */
 public class ImageAdapter extends BaseAdapter {
     private final ArrayList<VkImage> images;
-    private final Context mContext;
+    private final Context content;
 
-    public ImageAdapter(Context c, ArrayList<VkImage> arr) {
-        mContext = c;
-        images = arr;
+    public ImageAdapter(Context content, ArrayList<VkImage> images) {
+        this.content = content;
+        this.images = images;
     }
 
     public int getCount() {
@@ -26,27 +26,19 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     public Object getItem(int position) {
-        return images.get(position).getImageView(mContext);
+        return images.get(position).getImageView(content);
     }
 
     public long getItemId(int position) {
         return position;
     }
 
-    // create a new ImageView for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView;
-        if (convertView == null) {
-            // if it's not recycled, initialize some attributes
-            imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(300, 300));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8, 8, 8, 8);
-        } else {
-            imageView = (ImageView) convertView;
-        }
-
-        imageView.setImageBitmap(images.get(position).getBitmap());
-        return imageView;
+        ImageView iv = images.get(position).getImageView(content);
+        iv.setLayoutParams(new GridView.LayoutParams(300, 300));
+        iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        iv.setPadding(8, 8, 8, 8);
+        iv.setImageBitmap(images.get(position).getBitmap());
+        return iv;
     }
 }
