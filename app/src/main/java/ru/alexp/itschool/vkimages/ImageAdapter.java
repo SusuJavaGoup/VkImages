@@ -1,6 +1,7 @@
 package ru.alexp.itschool.vkimages;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 public class ImageAdapter extends BaseAdapter {
     private final ArrayList<VkImage> images;
     private final Context content;
+    private LayoutInflater layoutInflater;
 
     public ImageAdapter(Context content, ArrayList<VkImage> images) {
         this.content = content;
@@ -35,9 +37,9 @@ public class ImageAdapter extends BaseAdapter {
 
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView iv = images.get(position).getImageView(content);
-        iv.setLayoutParams(new GridView.LayoutParams(300, 300));
+        iv.setLayoutParams(new GridView.LayoutParams(GridView.LayoutParams.MATCH_PARENT, 300));
         iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        iv.setPadding(8, 8, 8, 8);
+        iv.setPadding(10, 10, 10, 10);
         iv.setImageBitmap(images.get(position).getBitmap());
         return iv;
     }
