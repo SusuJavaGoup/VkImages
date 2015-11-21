@@ -1,12 +1,7 @@
 package ru.alexp.itschool.vkimages;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.ImageView;
 
 /**
@@ -20,8 +15,11 @@ public class SingleImageViewerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_image_viewer);
 
-        ImageView iv = (ImageView)findViewById(R.id.FullImageView);
-       // iv.setImageBitmap();
+        final ImageView iv = (ImageView)findViewById(R.id.FullImageView);
+        final int imageId = getIntent().getExtras().getInt("imgToShow");
+        final VkImage image = ImageManager.getIstance().getImageById(imageId);
+
+        iv.setImageBitmap(image.getBitmap());
     }
 
 }

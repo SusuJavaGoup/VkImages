@@ -29,6 +29,7 @@ public class ImageManager {
                     JSONObject attachment = attachments.getJSONObject(j);
                     if (attachment.getString("type").equalsIgnoreCase("photo")) {
                         attachment = attachment.getJSONObject("photo");
+                        final int id = attachment.optInt("id", -1);
                         Iterator<String> it = attachment.keys();
                         String field = "";
                         while (it.hasNext()) {
@@ -37,7 +38,7 @@ public class ImageManager {
                                 field = ff;
                             }
                         }
-                        images.add(new VkImage(title, timestamp, new URL(attachment.getString(field))));
+                        images.add(new VkImage(title, timestamp, id, new URL(attachment.getString(field))));
                     }
                 }
             } catch (JSONException | MalformedURLException e) {
@@ -59,5 +60,13 @@ public class ImageManager {
             istance = new ImageManager();
 
         return istance;
+    }
+
+    public VkImage getImageById(int id) {
+        for (VkImage image : images) {
+            if (image.getId() == id)
+                return image;
+        }
+        return null;
     }
 }

@@ -20,11 +20,13 @@ public class VkImage {
     private final URL url;
     private Bitmap bitmap;
     private ImageView iv;
+    private final int id;
 
-    public VkImage(String title, int timestamp, URL image) {
+    public VkImage(String title, int timestamp, int id, URL image) {
         this.title = title;
         this.timestamp = timestamp;
         this.url = image;
+        this.id = id;
     }
 
     public VkImage setCoords(int[] coords) {
@@ -79,8 +81,8 @@ public class VkImage {
             iv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Vars.putValue("ImageToShow", getVkImage());
                     Intent intent = new Intent(context, SingleImageViewerActivity.class);
+                    intent.putExtra("imgToShow", getId());
                     context.startActivity(intent);
                 }
             });
@@ -88,7 +90,7 @@ public class VkImage {
         return iv;
     }
 
-    private VkImage getVkImage() {
-        return this;
+    public int getId() {
+        return id;
     }
 }
